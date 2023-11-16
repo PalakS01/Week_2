@@ -1,0 +1,26 @@
+---
+title: "R Markdown and Leaflet"
+author: "Palak"
+date: "2023-11-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r chunk 1}
+place <- c("Mumbai","Manipal")
+
+place_links <- c("<a href='https://maps.app.goo.gl/H2t3VHsQB3sGXQhB8'>Home</a>","<a href='https://maps.app.goo.gl/VsdjzKM6fM3tbF3q8'>College</a>" )
+
+lat <- c(19.1139 , 13.3527 )
+lng <- c(72.8967 , 74.7924)
+ 
+df <- data.frame(place, lat, lng)
+
+library(leaflet)
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(lat=lat, lng=lng, popup=place_links, clusterOptions=markerClusterOptions)
